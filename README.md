@@ -1,8 +1,8 @@
-#A Goal for a Simpler Pushkin
+# A Goal for a Simpler Pushkin
 
 Pushkin-only works – with bit of work. It's clear it needs to be much simpler for our target audience. Here's a goal I for how the project could look along with what we need to do to get there.
 
-##End-user Experience
+## End-user Experience
 
 **Client-side (using React with Webpack):**
 

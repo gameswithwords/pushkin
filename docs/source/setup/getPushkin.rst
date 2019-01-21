@@ -15,6 +15,7 @@ You will then need to set up the CLT. To do that, after you have cloned pushkin,
 
 ```
 $ chmod +x pushkin_installCLT.sh
+
 $ ./pushkin_installCLT.sh
 ```
 

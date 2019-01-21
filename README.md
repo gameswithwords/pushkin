@@ -6,7 +6,7 @@ Pushkin-only works – with bit of work. It's clear it needs to be much simpler 
 
 **Client-side (using React with Webpack):**
 
-```react
+```js
 import pushkin from 'pushkin-client';
 import jsPsych from 'jspsych';
 import React from 'react';

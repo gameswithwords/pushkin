@@ -14,7 +14,9 @@ make
 
 quiz
 ^^^^^^
-Creates a new quiz with all the required basic components. Pass the quiz name as an argument as follows: ``pushkin make quiz [quiz name]``. Spaces and other special characters should be avoid. Note that the name seen by end users of the website can be changed to have special characters if needed by modifying the quizzes page in the front end. Generated quizzes are stored in ``pushkin_user_quizzes``, 'quizzes/quizzes' by default.
+Creates a new quiz with all the required basic components. Pass the quiz name as an argument as follows: ``pushkin make quiz [quiz name]``. Spaces and other special characters should be avoid. Note that the name seen by end users of the website can be changed to have special characters if needed by modifying the quizzes page in the front end. 
+
+Generated quizzes are stored in ``pushkin_user_quizzes``, which is set to 'quizzes/quizzes' by default. The pushkin distribution does not include this directory. Instead, if it does not exist, it will be created when ``pushkin make quiz`` is run. This ensures that the pushkin distribution can be updated without overwriting any quizzes.
 
 compose
 ^^^^^^^^

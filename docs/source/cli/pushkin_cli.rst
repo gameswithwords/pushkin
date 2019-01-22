@@ -98,3 +98,13 @@ init
 -----------
 
 Runs ``npm install`` in the api, front-end, and db-worker directories as specified by their variable names in ``pushkin_config_vars.sh``.
+
+Developer Tools
+=================
+
+Developer tools are only available as part of the Github repository. They are useful for updating the Pushkin distribution (or a fork). They are not useful for running a website using Pushkin. The command for using the tools is ``pushkin-tools``.
+
+release
+-----------
+
+Running ``pushkin-tools release`` zips up the pushkin folder and deploys a new downloadable release to the github page. If using with a fork, you will need to edit the URL in ``.tools/bin/release.sh``.

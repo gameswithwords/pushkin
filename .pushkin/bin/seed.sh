@@ -5,7 +5,7 @@
 ##############################################
 
 set -e
-scriptName='compileFrontEnd'
+scriptName='seed'
 pushkin_conf_dir="$PWD"/.pushkin
 
 source "${pushkin_conf_dir}/pushkin_config_vars.sh"

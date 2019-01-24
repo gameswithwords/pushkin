@@ -10,6 +10,8 @@
       - "message-queue"
     links:
       - message-queue
+        # should just fail when not in dev mode
+      - test-db
     environment:
       - "AMQP_ADDRESS=amqp://message-queue:5672"
       - "DATABASE_URL=postgres://${main_db_user}:${main_db_pass}@${main_db_url}/${main_db_name}"

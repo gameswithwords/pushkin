@@ -2,7 +2,8 @@
 
 pushkin_env_file='.env'
 pushkin_docker_compose_file='docker-compose.production.yml'
-pushkin_docker_compose_noDep_file='docker-compose.production.noEnvDependency.yml'
+pushkin_docker_compose_file_dev='docker-compose.dev.yml'
+pushkin_docker_compose_noDep_file='docker-compose.noEnvDependency.yml'
 
 # folder locations
 # root houses the Dockerfile

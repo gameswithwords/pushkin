@@ -8,7 +8,7 @@ docker-compose.noEnvDependency.yml
 # but don't merge that stuff into the master branch
 server/html/*
 front-end/dist/*
-front-end/src/quizzes/quizzes.js
+front-end/src/quizzes/*
 quizzes/quizzes/*
 db-worker/migrations/*
 db-worker/seeds/*

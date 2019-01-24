@@ -1,7 +1,7 @@
 *.swp
 # the following two have passwords
 .env
-docker-compose.production.noEnvDependency.yml
+docker-compose.noEnvDependency.yml
 
 # make lots of irrelevant changes when testing new quizzes
 # when making new test branch, make sure to SYNC quizzes/quizzes,

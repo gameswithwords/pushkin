@@ -11,5 +11,8 @@
     "client"
   ],
   "author": "L3",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
 }

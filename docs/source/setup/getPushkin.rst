@@ -3,17 +3,11 @@
 Get Pushkin
 =========================
 
-Clone the latest version of Pushkin from GitHub::
+To install Pushkin, you will need `wget`, which is easily installed using Homebrew or another package manager.
 
-  git clone https://github.com/l3atbc-datadog/pushkin.git
+After installing `wget`, visit https://github.com/pushkin-consortium/pushkin_quickinstall and follow the instructions. This will download everything you need and set up the Command Line Tools (CLT).
 
-To make Pushkin's CLT as easy to use as it can be, we recommend adding an alias to your bash profile. Simply run the following command from your Pushkin project folder root to do this::
-
-  echo "alias pushkin=\"$PWD\"/.pushkin/pushkin" >> ~/.bash_profile
-
-If you know what you're doing, you can optionally add the same location to your ``$PATH`` as well, thus allowing other scripts to run pushkin commands.
-
-.. note:: These docs assume that at least one of the above steps have been taken and the command 'pushkin' points to the CLT. If you choose not to do this, be aware that most of the docs will not work.
+.. note:: These docs assume that the  command 'pushkin' points to the CLT. If you choose not to do this, be aware that most of the docs will not work.
 
 Pushkin relies on the following programs, which can easily be installed with Homebrew - if you're on a Mac - or another package manager:
 - node
@@ -23,3 +17,47 @@ Pushkin relies on the following programs, which can easily be installed with Hom
 Once these are installed, run ``pushkin init`` to automated installing packages and setting up the Pushkin environment.
 
 Once you've got Pushkin downloaded and installed, see :ref:`new-quiz` to make a quiz.
+
+Developing Pushkin
+--------------------
+
+If you are planning on contributing to pushkin, clone (or better yet, fork) from GitHub::
+
+  git clone https://github.com/l3atbc-datadog/pushkin.git
+
+You will then need to set up the CLT. To do that, after you have cloned pushkin, move to pushkin's root directory and run:
+
+```
+$ chmod +x pushkin_installCLT.sh
+
+$ ./pushkin_installCLT.sh
+```
+
+This will also install the pushkin developer tools. (If you are using a fork, see the documentation for the CLT ``pushkin-tools release``.)
+
+Next download and install Go from [here](https://golang.org/).
+
+Next, we'll install [gothub](https://github.com/itchio/gothub), which is a set of tools for publishing software releases on github. The instructions in the README are incomplete, so follow the instructions below instead. First, run
+
+```
+$ go get github.com/itchio/gothub
+```
+
+Assuming you don't run into any snags, you should next add gothub to your Go path. This is probably in your `.bash_profile`. If it wasn't, you would almost certaintly know.
+
+```
+$ echo "export PATH=$PATH:$(go env GOPATH)/bin" >> ~/.bash_profile
+```
+
+Next, you'll need to get a Github token for the repository you are using (either the canonical repo or your fork). Follow instructions [here](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/). Then add the token to your bash profile:
+
+```
+$ echo "export GITHUB_TOKEN=... [<- with actual token]" >> ~/.bash_profile
+```
+
+THe developer tools should now be set up.
+
+
+
+
+

@@ -14,8 +14,22 @@ source "${pushkin_conf_dir}/bin/util/isQuiz.sh"
 set +e
 
 ##############################################
-# variables
+# create pushkin_user_quizzes directory, if needed
 # WORKING DIR: pushkin root
+##############################################
+
+# this does not exist as part of the core pushkin distribution
+# so that the distribution can be updated without overwriting
+
+if [ ! -d "${pushkin_user_quizzes}" ]; then
+        mkdir -p "${pushkin_user_quizzes}"
+	cp .pushkin/boilerplate/quizzes/* "${pushkin_user_quizzes}"/../
+fi
+
+
+
+##############################################
+# variables
 ##############################################
 set -e
 

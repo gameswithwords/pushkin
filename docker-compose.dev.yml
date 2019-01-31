@@ -2,6 +2,8 @@ version: '2'
 volumes:
   # for rabbitmq
   message_queue_datavolume: 
+  # for a local postgres testing db
+  test_db_data:
 services:
   api:
     image: "${image_prefix}/pushkin_api:${image_tag}"
@@ -66,5 +68,13 @@ services:
       - '433'
     links:
       - api
+
+  test-db:
+    image: "postgres:11"
+    ports:
+      - "5432:5432"
+    volumes:
+      - test_db_data:/var/lib/postgresql/data
+
 # ###############################################################
 # #@AUTOAPPENDBELOWTHISLINE

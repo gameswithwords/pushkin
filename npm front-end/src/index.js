@@ -31,7 +31,7 @@ module.exports = class Pushkin {
 
 	}
 
-	loadScripts(urls) { Promise.all(urls.map(loadScript)); }
+	loadScripts(urls) { Promise.all(urls.map(this.loadScript)); }
 
 	prepExperimentRun() {
 		return this.con.post('/startExperiment');
@@ -47,7 +47,7 @@ module.exports = class Pushkin {
 
 	setSaveAfterEachStimulus(stimuli) {
 		return stimuli.map(s => ({
-			...stimTrial,
+			...s,
 			on_finish: this.saveStimulusResponse
 		}));
 	}

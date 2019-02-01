@@ -99,8 +99,7 @@ const config = {
 							localIdentName: args.debug ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
 							minimize: !args.debug // CSS Nano http://cssnano.co/options/
 						}
-					},
-					{ loader: 'sass-loader' }
+					}
 				]
 			},
 			{

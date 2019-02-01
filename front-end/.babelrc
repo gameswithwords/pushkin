@@ -1,15 +1,16 @@
 {
-  "presets": [
-    [
-      "env",
-      {
-        "modules": false
-      }
-    ],
-	"stage-2",
-    "react"
-  ],
-  "plugins": [
-    "react-hot-loader/babel"
-  ]
+	"presets": [
+		[
+			"env",
+		{
+			"modules": false
+		}
+		],
+		"stage-2",
+		"react"
+	],
+	"plugins": [
+		"react-hot-loader/babel",
+		"transform-object-rest-spread"
+	]
 }

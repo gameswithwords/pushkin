@@ -1,8 +1,9 @@
 {
   "name": "pushkin-client",
-  "version": "1.0.0",
+  "version": "0.0.1-alpha.2",
   "description": "A front-end Javascript module for interfacing with a Pushkin API.",
-  "main": "index.js",
+  "main": "build/index.js",
+	"files": ["build/*"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src -d build"

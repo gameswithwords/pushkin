@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-module.exports = class Pushkin {
+export default class Pushkin {
 	constructor() {
 		this.con = undefined;
 	}
@@ -63,4 +63,4 @@ module.exports = class Pushkin {
 	endExperiment() {
 		return this.con.post('/endExperiment');
 	}
-};
+}

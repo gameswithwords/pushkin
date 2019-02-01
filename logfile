@@ -1,0 +1,12 @@
+2019-01-22 17:15:17.944 EST [3894] LOG:  listening on IPv6 address "::1", port 5432
+2019-01-22 17:15:17.944 EST [3894] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2019-01-22 17:15:17.945 EST [3894] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2019-01-22 17:15:17.957 EST [3895] LOG:  database system was shut down at 2019-01-22 17:15:04 EST
+2019-01-22 17:15:17.962 EST [3894] LOG:  database system is ready to accept connections
+2019-01-22 17:16:07.124 EST [3916] ERROR:  role "jacob" already exists
+2019-01-22 17:16:07.124 EST [3916] STATEMENT:  CREATE ROLE jacob NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN;
+2019-01-22 17:19:05.147 EST [6290] FATAL:  database "jacob" does not exist
+2019-01-22 20:52:01.690 EST [3894] LOG:  received smart shutdown request
+2019-01-22 20:52:01.691 EST [3894] LOG:  worker process: logical replication launcher (PID 3901) exited with exit code 1
+2019-01-22 20:52:01.691 EST [3896] LOG:  shutting down
+2019-01-22 20:52:01.698 EST [3894] LOG:  database system is shut down

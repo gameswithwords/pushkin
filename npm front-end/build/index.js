@@ -34,6 +34,7 @@ function () {
       this.con = _axios.default.create({
         baseURL: quizAPIUrl
       });
+      console.log('connected');
     }
   }, {
     key: "loadScript",

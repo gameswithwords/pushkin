@@ -31,7 +31,7 @@ export default class Pushkin {
 
 	}
 
-	loadScripts(urls) { Promise.all(urls.map(this.loadScript)); }
+	loadScripts(urls) { return Promise.all(urls.map(this.loadScript)); }
 
 	prepExperimentRun() {
 		return this.con.post('/startExperiment');

@@ -34,11 +34,12 @@ function () {
       this.con = _axios.default.create({
         baseURL: quizAPIUrl
       });
-      console.log('connected');
     }
   }, {
     key: "loadScript",
     value: function loadScript(url) {
+      var _this = this;
+
       return new Promise(function (resolve, reject) {
         setTimeout(function () {
           return reject("Loading timed out for ".concat(url));
@@ -54,7 +55,7 @@ function () {
         var script = document.createElement('script');
 
         script.onload = function () {
-          return resolve;
+          return resolve(_this);
         };
 
         script.src = url;
@@ -64,7 +65,7 @@ function () {
   }, {
     key: "loadScripts",
     value: function loadScripts(urls) {
-      Promise.all(urls.map(this.loadScript));
+      return Promise.all(urls.map(this.loadScript));
     }
   }, {
     key: "prepExperimentRun",
@@ -76,6 +77,8 @@ function () {
     value: function getAllStimuli() {
       return this.con.post('/getStimuli').then(function (res) {
         var stimuli = res.data.resData;
+        console.log(stimuli); // eslint-disable-line
+
         return stimuli.map(function (s) {
           return JSON.parse(s.stimulus);
         });
@@ -84,11 +87,11 @@ function () {
   }, {
     key: "setSaveAfterEachStimulus",
     value: function setSaveAfterEachStimulus(stimuli) {
-      var _this = this;
+      var _this2 = this;
 
       return stimuli.map(function (s) {
         return _objectSpread({}, s, {
-          on_finish: _this.saveStimulusResponse
+          on_finish: _this2.saveStimulusResponse
         });
       });
     }

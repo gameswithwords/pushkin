@@ -24,7 +24,7 @@ export default class Pushkin {
 			}
 
 			const script = document.createElement('script');
-			script.onload = () => resolve;
+			script.onload = () => resolve(this);
 			script.src = url;
 			document.body.appendChild(script);
 		});
@@ -41,6 +41,7 @@ export default class Pushkin {
 		return this.con.post('/getStimuli')
 			.then(res => {
 				const stimuli = res.data.resData;
+				console.log(stimuli); // eslint-disable-line
 				return stimuli.map(s => JSON.parse(s.stimulus));
 			});
 	}

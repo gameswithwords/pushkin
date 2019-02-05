@@ -49,7 +49,7 @@ export default class Pushkin {
 	setSaveAfterEachStimulus(stimuli) {
 		return stimuli.map(s => ({
 			...s,
-			on_finish: this.saveStimulusResponse
+			on_finish: this.saveStimulusResponse.bind(this)
 		}));
 	}
 

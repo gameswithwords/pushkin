@@ -91,7 +91,7 @@ function () {
 
       return stimuli.map(function (s) {
         return _objectSpread({}, s, {
-          on_finish: _this2.saveStimulusResponse
+          on_finish: _this2.saveStimulusResponse.bind(_this2)
         });
       });
     }

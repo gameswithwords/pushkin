@@ -24,6 +24,14 @@ const babelConfig = {
 	]
 };
 
+
+
+args.debug = true;
+
+
+
+
+
 // Webpack configuration (main.js => dist/main.{hash}.js)
 // http://webpack.github.io/docs/configuration.html
 const config = {

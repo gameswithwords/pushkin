@@ -13,7 +13,7 @@ export default class Pushkin {
 
 	loadScript(url) {
 		return new Promise( (resolve, reject) => {
-			setTimeout(() => reject(`Loading timed out for ${url}`), 5000);
+			const timeout = setTimeout(() => reject(`Loading timed out for ${url}`), 5000);
 
 			// check if this script is already loaded and reload if it is
 			// can't use array 'has' because getElements doesn't return an array
@@ -24,7 +24,10 @@ export default class Pushkin {
 			}
 
 			const script = document.createElement('script');
-			script.onload = () => resolve(this);
+			script.onload = () => {
+				clearTimeout(timeout);
+				resolve(script);
+			};
 			script.src = url;
 			document.body.appendChild(script);
 		});
@@ -33,15 +36,12 @@ export default class Pushkin {
 
 	loadScripts(urls) { return Promise.all(urls.map(this.loadScript)); }
 
-	prepExperimentRun() {
-		return this.con.post('/startExperiment');
-	}
+	prepExperimentRun() { return this.con.post('/startExperiment'); }
 
 	getAllStimuli() {
 		return this.con.post('/getStimuli')
 			.then(res => {
 				const stimuli = res.data.resData;
-				console.log(stimuli); // eslint-disable-line
 				return stimuli.map(s => JSON.parse(s.stimulus));
 			});
 	}
@@ -61,7 +61,5 @@ export default class Pushkin {
 		return this.con.post('/stimulusResponse', postData);
 	}
 
-	endExperiment() {
-		return this.con.post('/endExperiment');
-	}
+	endExperiment() { return this.con.post('/endExperiment'); }
 }

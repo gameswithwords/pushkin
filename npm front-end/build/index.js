@@ -38,10 +38,8 @@ function () {
   }, {
     key: "loadScript",
     value: function loadScript(url) {
-      var _this = this;
-
       return new Promise(function (resolve, reject) {
-        setTimeout(function () {
+        var timeout = setTimeout(function () {
           return reject("Loading timed out for ".concat(url));
         }, 5000); // check if this script is already loaded and reload if it is
         // can't use array 'has' because getElements doesn't return an array
@@ -55,7 +53,8 @@ function () {
         var script = document.createElement('script');
 
         script.onload = function () {
-          return resolve(_this);
+          clearTimeout(timeout);
+          resolve(script);
         };
 
         script.src = url;
@@ -77,8 +76,6 @@ function () {
     value: function getAllStimuli() {
       return this.con.post('/getStimuli').then(function (res) {
         var stimuli = res.data.resData;
-        console.log(stimuli); // eslint-disable-line
-
         return stimuli.map(function (s) {
           return JSON.parse(s.stimulus);
         });
@@ -87,11 +84,11 @@ function () {
   }, {
     key: "setSaveAfterEachStimulus",
     value: function setSaveAfterEachStimulus(stimuli) {
-      var _this2 = this;
+      var _this = this;
 
       return stimuli.map(function (s) {
         return _objectSpread({}, s, {
-          on_finish: _this2.saveStimulusResponse.bind(_this2)
+          on_finish: _this.saveStimulusResponse.bind(_this)
         });
       });
     }

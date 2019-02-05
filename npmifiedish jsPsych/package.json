@@ -1,0 +1,11 @@
+{
+  "name": "pushkin-jspsych",
+  "version": "0.0.1",
+  "description": "A workable version of jsPsych that can be imported as an npm module and reassigned manually to window.jsPsych.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "L3",
+  "license": "ISC"
+}

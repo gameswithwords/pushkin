@@ -62,8 +62,14 @@ echo "# Do not edit directly (your changes will be overwritten)" >> "${cron_tab}
 set +e
 for qPath in "${user_quizzes}"/*; do
 	if ! isQuiz "${qPath}"; then continue; fi
-
 	qName=$(basename ${qPath})
+
+	log "installing npm packages for ${qName}"
+	cwd="$(pwd)"
+	cd "${qPath}" 
+	npm install
+	cd "${cwd}"
+
 	log "moving files for ${qName}"
 
 	mkdir -p "${api_controllers}/${qName}"

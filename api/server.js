@@ -1,5 +1,5 @@
 let amqp = require('amqplib/callback_api');
-const path = require('path');
+//const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
@@ -107,4 +107,4 @@ amqp.connect(AMQP_ADDRESS, function(err, conn) {
   });
 });
 
-module.exports = app;
+//module.exports = app;

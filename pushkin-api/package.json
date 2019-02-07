@@ -1,0 +1,27 @@
+{
+    "name": "pushkin-api",
+    "version": "0.0.2",
+    "description": "The core Pushkin API module designed for interfacing between Pushkin clients and Pushkin workers through RabbitMQ",
+    "main": "build/index.js",
+    "files": [
+        "build/*"
+    ],
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "babel src -d build",
+        "pubNewVersion": "npm run build && node publishNewVersion.js && npm publish"
+    },
+    "keywords": [
+        "pushkin",
+        "api"
+    ],
+    "author": "L3",
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/cli": "^7.2.3",
+        "@babel/core": "^7.2.2",
+        "@babel/preset-env": "^7.3.1",
+        "babel-eslint": "^10.0.1",
+        "eslint": "^5.13.0"
+    }
+}

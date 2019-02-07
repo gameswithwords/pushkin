@@ -1,7 +1,7 @@
 {
     "name": "pushkin-client",
     "version": "0.0.4",
-    "description": "A front-end Javascript module for interfacing with a Pushkin API.",
+    "description": "A front-end Javascript module for interfacing with a Pushkin API",
     "main": "build/index.js",
     "files": [
         "build/*"
@@ -9,7 +9,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "babel src -d build",
-        "pubNewAlpha": "npm run build && node publishNewAlphaVersion.js && npm publish"
+        "pubNewVersion": "npm run build && node publishNewVersion.js && npm publish"
     },
     "keywords": [
         "pushkin",

@@ -53,19 +53,20 @@ export default class PushkinAPI {
 		};
 	}
 
-	passRouteToMethod(route, method, queue) {
+	// pass posts on this route to this method via this queue
+	pass(route, method, queue) {
+		if (this.expressListening)
+			throw new Error('Unable to add passes after the API has started.');
 		this.app.post(route, this.passAlongMethod(route, method, queue));
 	}
 
-	use(route, controller) {
+	useCustomController(route, controller) {
 		if (this.expressListening)
-			throw new Error('Pushkin API has already begun listening. Controllers must be added beforehand.');
+			throw new Error('Unable to add controllers after the API has started.');
 		this.app.use(route, controller);
 	}
 
-	enableCoreRoutes() {
-		this.app.use('/api', coreRouter);
-	}
+	enableCoreRoutes() { this.useCustomController('/api', coreRouter); }
 
 	start() {
 		this.expressListening = true;

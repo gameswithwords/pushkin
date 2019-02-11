@@ -1,4 +1,4 @@
-import pushkin from '../../../pushkin-api/build/index.js';
+import pushkin from 'pushkin-api';
 
 const db_read_queue = 'apinpmtest_quiz_dbread'; // simple endpoints
 const db_write_queue = 'apinpmtest_quiz_dbwrite'; // simple save endpoints (durable/persistent)

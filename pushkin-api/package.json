@@ -1,6 +1,6 @@
 {
     "name": "pushkin-api",
-    "version": "0.0.6",
+    "version": "0.0.15",
     "description": "The core Pushkin API module designed for interfacing between Pushkin clients and Pushkin workers through RabbitMQ",
     "main": "build/index.js",
     "files": [
@@ -25,6 +25,7 @@
         "eslint": "^5.13.0"
     },
     "dependencies": {
+        "@babel/polyfill": "^7.2.5",
         "amqplib": "^0.5.3",
         "cookie-session": "^2.0.0-beta.3",
         "express": "^4.16.4",

@@ -1,5 +1,7 @@
 "use strict";
 
+require("@babel/polyfill");
+
 var _api = _interopRequireDefault(require("./api.js"));
 
 var _controllerBuilder = _interopRequireDefault(require("./controllerBuilder.js"));

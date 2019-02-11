@@ -1,15 +1,16 @@
 import express from 'express';
-import amqp from 'amqplib/callback_api';
+import amqp from 'amqplib';
 import uuid from 'uuid/v4';
 import cookieSession from 'cookie-session';
 // import rpc from './rpc.js';
 // import trim from './trim.js';
-import coreRouter from './coreRouter.js';
+//import coreRouter from './coreRouter.js';
 
 export default class PushkinAPI {
 	constructor(expressPort, amqpAddress) {
 		this.expressPort = expressPort;
 		this.amqpAddress = amqpAddress;
+		this.initialized = false;
 
 		this.app = express();
 		this.app.set('trust-proxy', 1);
@@ -20,17 +21,23 @@ export default class PushkinAPI {
 		}));
 		this.app.use( (req, res, next) => {
 			req.session.id = req.session.id || uuid();
+			console.log(`API got request for ${req}`);
 			next();
 		});
 		// this.app.use(bodyParser.json()); // what is this?
 		// this.app.use(cors()); // look this up, too
 		this.expressListening = false;
+	}
 
-		amqp.connect(this.amqpAddress, (err, conn) => {
-			if (err)
-				return console.log(`Error connecting to message queue: ${err}`);
-			this.conn = conn;
-		});
+	async init() {
+		return amqp.connect(this.amqpAddress)
+			.then(conn => {
+				this.conn = conn;
+				this.initialized = true;
+			})
+			.catch(err => {
+				console.log(`Error connecting to message queue: ${err}`);
+			});
 	}
 
 	useController(route, controller) {
@@ -40,10 +47,14 @@ export default class PushkinAPI {
 	}
 
 	usePushkinController(route, pushkinController) {
+		if (this.expressListening)
+			throw new Error('Unable to add controllers after the API has started.');
+		if (!this.initialized)
+			throw new Error('The API must first be initialized by calling .init().');
 		this.useController(route, pushkinController.getConnFunction()(this.conn));
 	}
 
-	enableCoreRoutes() { this.usePushkinController('/api', coreRouter); }
+	//enableCoreRoutes() { this.usePushkinController('/api', coreRouter); }
 
 	start() {
 		this.expressListening = true;

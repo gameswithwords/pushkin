@@ -19,6 +19,14 @@ export default class ControllerBuilder {
 		this.directUses.push({ httpMethod, route, handler });
 	}
 
+	setDefaultPasses(readQueue, writeQueue, taskQueue) {
+		this.setPass('/startExperiment', 'startExperiment', taskQueue);
+		this.setPass('/getStimuli', 'getStimuli', readQueue);
+		this.setPass('/metaResponse', 'insertMetaResponse', writeQueue);
+		this.setPass('/stimulusResponse', 'insertStimulusResponse', writeQueue);
+		this.setPass('/endExperiment', 'endExperiment', taskQueue);
+	}
+
 	getConnFunction() {
 		return conn => {
 			const router = new express.Router();

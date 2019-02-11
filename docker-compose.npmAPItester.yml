@@ -1,0 +1,86 @@
+version: '2'
+volumes:
+  # for rabbitmq
+  message_queue_datavolume: 
+  # for a local postgres testing db
+  test_db_data:
+services:
+  api:
+    image: "bennetkl/userapi"
+    environment:
+      - 'AMQP_ADDRESS=amqp://message-queue:5672'
+      - 'NODE_ENV=production'
+      - 'PORT=3000'
+    expose:
+      - "3000"
+    links:
+      - message-queue
+    command:
+      - bash
+      - dockerStart.sh
+    labels:
+      io.rancher.scheduler.global: 'true'
+
+  message-queue:
+    image: 'rabbitmq:3.6-management'
+    expose:
+      - '5672'
+      - '15672'
+    ports:
+      - '15672'
+    environment:
+      CONFD_ARGS: '--interval 5'
+      RABBITMQ_CLUSTER_PARTITION_HANDLING: autoheal
+      RABBITMQ_NET_TICKTIME: '60'
+      RABBITMQ_ERLANG_COOKIE: 'message-queue-cookie'
+      RABBITMQ_NODENAME: "rabbitmqnode@localhost"
+    volumes:
+        # database location
+        # config file stored in /etc/rabbitmq/rabbitmq.config
+      - message_queue_datavolume:/var/lib/rabbitmq 
+    labels:
+      io.rancher.scheduler.global: 'true'
+
+  server:
+    image: 'bennetkl/pushkin_server:test'
+    labels:
+      io.rancher.scheduler.global: 'true'
+    environment:
+      API_PORT: "3000"
+    expose:
+      - '80'
+      - '443'
+    ports:
+      - 80:80
+      - '433'
+    links:
+      - api
+
+  test-db:
+    image: "postgres:11"
+    ports:
+      - "5432:5432"
+    volumes:
+      - test_db_data:/var/lib/postgresql/data
+
+# ###############################################################
+# #@AUTOAPPENDBELOWTHISLINE
+#@AUTOAPPENDBELOWTHISLINE
+# indentation must match main compose file
+# image prefix and tag are variables stored in main .env file
+# variables defined in pushkin_config_vars.sh will be substituted on creation of the quiz
+# along with QUIZ_NAME
+
+  apinpmtest-pushkin-quiz:
+    image: 'bennetkl/apinpmtest-pushkin-quiz:test'
+    command: 'bash start.sh'
+    depends_on:
+      - "message-queue"
+    links:
+      - message-queue
+        # should just fail when not in dev mode
+      - test-db
+    environment:
+      - "AMQP_ADDRESS=amqp://message-queue:5672"
+      - "DATABASE_URL=postgres://postgres:@test-db/test_db_name"
+      - "TRANSACTION_DATABASE_URL=postgres://:@/"

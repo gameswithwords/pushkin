@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+const crypto = require('crypto'); // eslint-disable-line
 const trim = require('./trim').trim;
 
 module.exports = class Handler {
@@ -32,52 +32,52 @@ module.exports = class Handler {
 	// returns a promise with the requested data (if any)
 	// throws an error if the method doesn't exist
 	async handle(req) {
-			// some methods send '' as the data string when none is needed
-			// so check for undefined rather than truthyness
-			if (!req || !req.method || req.data === undefined)
-				throw new Error('invalid request. Requests must have a method and data field');
+		// some methods send '' as the data string when none is needed
+		// so check for undefined rather than truthyness
+		if (!req || !req.method || req.data === undefined)
+			throw new Error('invalid request. Requests must have a method and data field');
 
-			// each method in the switch statement below should use this function to ensure
-			// all its required fields are present
-			const requireDataFields = fields => {
-				const missing =
-					(typeof req.data == 'object' ?
-						fields.reduce( (acc, field) => ((field in req.data) ? acc : [...acc, field]), [])
-						: fields
-					);
-				if (missing.length > 0)
-					throw new Error(`${req.method}'s req.data must have fields ${fields}. Missing ${missing}`);
-			};
+		// each method in the switch statement below should use this function to ensure
+		// all its required fields are present
+		const requireDataFields = fields => {
+			const missing =
+				(typeof req.data == 'object' ?
+					fields.reduce( (acc, field) => ((field in req.data) ? acc : [...acc, field]), [])
+					: fields
+				);
+			if (missing.length > 0)
+				throw new Error(`${req.method}'s req.data must have fields ${fields}. Missing ${missing}`);
+		};
 
 		// using a mapping like this is nicer than calling something like "this[req.method]" because
 		// it allows us to have other functions without exposing them all to the api
 		// as well as require the pertinent fields
-		
-			switch (req.method) {
 
-			// methods called through API controller
+		switch (req.method) {
 
-				case 'startExperiment':
-					return this.startExperiment(req.sessionId);
+				// methods called through API controller
 
-				case 'getStimuli':
-					return this.getStimuli(req.sessionId);
+			case 'startExperiment':
+				return this.startExperiment(req.sessionId);
 
-				case 'insertMetaResponse':
-					// 'type' must match a column in the database's user table
-					requireDataFields(['type', 'response']);
-					return this.insertMetaResponse(req.sessionId, req.data.type, req.data.response);
+			case 'getStimuli':
+				return this.getStimuli(req.sessionId);
 
-				case 'insertStimulusResponse':
-					requireDataFields(['data_string']);
-					return this.insertStimulusResponse(req.sessionId, req.data.data_string);
+			case 'insertMetaResponse':
+				// 'type' must match a column in the database's user table
+				requireDataFields(['type', 'response']);
+				return this.insertMetaResponse(req.sessionId, req.data.type, req.data.response);
 
-				case 'endExperiment':
-					return this.endExperiment(req.sessionId);
+			case 'insertStimulusResponse':
+				requireDataFields(['data_string']);
+				return this.insertStimulusResponse(req.sessionId, req.data.data_string);
 
-				default:
-					throw new Error(`method ${req.method} does not exist`);
-			}
+			case 'endExperiment':
+				return this.endExperiment(req.sessionId);
+
+			default:
+				throw new Error(`method ${req.method} does not exist`);
+		}
 	}
 
 	/*************** METHODS CALLED BY HANDLER & HELPER FUNCTIONS (all return promises) ****************/

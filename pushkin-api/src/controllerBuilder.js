@@ -35,6 +35,7 @@ export default class ControllerBuilder {
 				router.post(point.route, (req, res, next) => { // eslint-disable-line
 
 					console.log(`${point.route} hit (in router conn function)`);
+					console.log(req.body);
 
 					const rpcParams = {
 						method: point.method,

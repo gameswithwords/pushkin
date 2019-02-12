@@ -1,9 +1,10 @@
 import express from 'express';
 import amqp from 'amqplib';
 import uuid from 'uuid/v4';
+import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
 // import rpc from './rpc.js';
-// import trim from './trim.js';
+//import trim from './trim.js';
 //import coreRouter from './coreRouter.js';
 
 export default class PushkinAPI {
@@ -24,7 +25,7 @@ export default class PushkinAPI {
 			console.log(`API got request for ${req}`);
 			next();
 		});
-		// this.app.use(bodyParser.json()); // what is this?
+		this.app.use(bodyParser.json());
 		// this.app.use(cors()); // look this up, too
 		this.expressListening = false;
 	}
@@ -45,9 +46,7 @@ export default class PushkinAPI {
 		if (this.expressListening)
 			throw new Error('Unable to add controllers after the API has started.');
 		console.log('API using controller');
-		console.log(controller);
-		this.app.use(route, controller);
-	}
+		this.app.use(route, controller); }
 
 	usePushkinController(route, pushkinController) {
 		if (this.expressListening)

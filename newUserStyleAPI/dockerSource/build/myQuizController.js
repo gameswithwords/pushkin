@@ -1,24 +1,17 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
+var pushkin = require('pushkin-api');
 
-var _index = _interopRequireDefault(require("../../../pushkin-api/build/index.js"));
+var db_read_queue = 'test_quiz_dbread'; // simple endpoints
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var db_write_queue = 'test_quiz_dbwrite'; // simple save endpoints (durable/persistent)
 
-var db_read_queue = 'apinpmtest_quiz_dbread'; // simple endpoints
+var task_queue = 'test_quiz_taskworker'; // for stuff that might need preprocessing
 
-var db_write_queue = 'apinpmtest_quiz_dbwrite'; // simple save endpoints (durable/persistent)
-
-var task_queue = 'apinpmtest_quiz_taskworker'; // for stuff that might need preprocessing
-
-var myController = new _index.default.ControllerBuilder();
+var myController = new pushkin.ControllerBuilder();
 myController.setDefaultPasses(db_read_queue, db_write_queue, task_queue);
 myController.setDirectUse('/health', function (req, res, next) {
+  // eslint-disable-line
   res.send('obese');
 }, 'get');
-var _default = myController;
-exports.default = _default;
+module.exports = myController;

@@ -3,12 +3,14 @@ const REPLY_QUEUE = 'amq.rabbitmq.reply-to';
 
 // returns a promise that resolves to the result of the RPC
 export default (conn, channelName, body) => (
-	new Promise( (resolve, reject) => (
-		conn.createChannel((err, ch) => {
+	new Promise( (resolve, reject) => {
+		console.log(`rpc got call (${conn}, ${channelName}, ${JSON.stringify(body)})`);
+		return conn.createChannel((err, ch) => {
 			if (err) return reject(err);
 			const corr = uuid();
 
 			const received = msg => {
+				console.log(`received msg not necessarily for us: ${JSON.stringify(msg)}`);
 				if (!msg) return; // connection closed sends blank message
 				if (msg.properties.correlationId !== corr) return; // not a message for us
 
@@ -24,7 +26,8 @@ export default (conn, channelName, body) => (
 				correlationId: corr,
 				replyTo: REPLY_QUEUE
 			});
-		})
-	))
+		});
+	}
+	)
 );
 

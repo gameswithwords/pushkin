@@ -34,6 +34,8 @@ export default class ControllerBuilder {
 			this.passAlongs.forEach(point => 
 				router.post(point.route, (req, res, next) => { // eslint-disable-line
 
+					console.log(`${point.route} hit (in router conn function)`);
+
 					const rpcParams = {
 						method: point.method,
 						data: req.body,

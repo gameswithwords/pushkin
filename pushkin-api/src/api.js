@@ -34,6 +34,7 @@ export default class PushkinAPI {
 			.then(conn => {
 				this.conn = conn;
 				this.initialized = true;
+				console.log('API init connected');
 			})
 			.catch(err => {
 				console.log(`Error connecting to message queue: ${err}`);
@@ -43,6 +44,8 @@ export default class PushkinAPI {
 	useController(route, controller) {
 		if (this.expressListening)
 			throw new Error('Unable to add controllers after the API has started.');
+		console.log('API using controller');
+		console.log(controller);
 		this.app.use(route, controller);
 	}
 

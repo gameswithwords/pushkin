@@ -69,7 +69,6 @@ recurseReplace () {
 			replaceQuizName "${thing}" "${quizName}" > "${outRoot}/${newBase}"
 
 		elif [ -d "${thing}" ]; then
-
 			# normal case/otherwise:
 			mkdir "${outRoot}/${base}"
 			recurseReplace "${outRoot}/${base}" "${thing}" "${qname}"

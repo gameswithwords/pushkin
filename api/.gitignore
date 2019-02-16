@@ -1,1 +1,5 @@
-build/
+
+typings/
+node_modules
+
+log

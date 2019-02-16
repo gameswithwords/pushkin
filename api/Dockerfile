@@ -1,10 +1,7 @@
 FROM node:latest
 RUN apt-get update && apt-get install -y netcat
-COPY ./dockerSource/build /usr/src/app
-COPY ./dockerSource/package.json /usr/src/app
-COPY ./dockerSource/dockerStart.sh /usr/src/app
+COPY . /usr/src/app
 WORKDIR /usr/src/app
-RUN npm install --production
-
-# Note that this is overridden in docker compose
-CMD ["node", "index.js"]
+RUN npm install --production -s
+# Note that the docker compose file overrides this to start.sh instead
+CMD ["npm","start"]

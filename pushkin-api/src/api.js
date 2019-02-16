@@ -59,6 +59,8 @@ export default class PushkinAPI {
 	//enableCoreRoutes() { this.usePushkinController('/api', coreRouter); }
 
 	start() {
+		if (!this.initialized)
+			throw new Error('The API hasn\'t been successfully initialized');
 		this.expressListening = true;
 		this.app.listen(this.expressPort, () => {
 			console.log(`Pushkin API listening on port ${this.expressPort}`);

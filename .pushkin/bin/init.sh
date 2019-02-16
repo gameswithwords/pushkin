@@ -28,23 +28,40 @@ set +e
 # start
 ##############################################
 
+dirs=( "front-end" "api" "quizzes" )
+
+log "copying files"
+for i in "${dirs[@]}"
+do
+	mkdir "$dir"
+	cp -R "${pushkin_conf_dir}/initFiles/${dir}/" ./"${dir}"
+done
+
+log "installing dependencies"
+for i in "${dirs[@]}"
+do
+	cd "$dir"
+	npm install
+	cd ..
+done
+
 # .env file setup
-cp .pushkin/dotEnvTemplate .env
+#cp .pushkin/dotEnvTemplate .env
 
 # npm installs
-npmInstall () {
-	local origin="$(pwd)"
-	cd "$1"
-	if [ ! "$?" == 0 ]; then
-		die "something went wrong. it appears core directories are missing"
-	fi
-	npm install
-	cd "$origin"
-}
-npmInstall "${pushkin_api}"&
-npmInstall "${pushkin_db_worker}"&
-npmInstall "${pushkin_front_end}"&
-wait
-
-log "open '.env' in a text editor and fill in the necessary information to complete setup"
-log "done"
+#npmInstall () {
+#	local origin="$(pwd)"
+#	cd "$1"
+#	if [ ! "$?" == 0 ]; then
+#		die "something went wrong. it appears core directories are missing"
+#	fi
+#	npm install
+#	cd "$origin"
+#}
+#npmInstall "${pushkin_api}"&
+#npmInstall "${pushkin_db_worker}"&
+#npmInstall "${pushkin_front_end}"&
+#wait
+#
+#log "open '.env' in a text editor and fill in the necessary information to complete setup"
+#log "done"

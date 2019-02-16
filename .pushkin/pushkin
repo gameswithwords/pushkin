@@ -4,7 +4,7 @@
 
 source '.pushkin/pushkin_config_vars.sh'
 source '.pushkin/bin/core.sh'
-source "${pushkin_env_file}"
+#source "${pushkin_env_file}"
 
 log () { echo "${boldFont}pushkin:${normalFont} ${1}"; }
 die () { log "$1"; }

@@ -41,7 +41,7 @@ const config = {
 	context: path.resolve(__dirname), // The base directory for resolving the entry option
 
 	entry: [
-		'./src/main.js',
+		'./src/site/main.js',
 		...(args.debug && args.hmr ?  ['react-hot-loader/patch', 'webpack-host-middleware/client'] : [])
 	],
 
@@ -135,8 +135,8 @@ const config = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: './src/index.html',
-			title: 'Games With Words',
+			template: './src/site/index.html',
+			title: 'My Pushkin Site',
 			options: {
 				debug: args.debug,
 				trackingID: args.google_analytics_site_id,

@@ -8,7 +8,7 @@ const webpackConfig = require('./webpack.config.js');
 // ---------------------------
 
 let clean = () => {
-	return del(['dist/*', '!dist/.git'], { dot: true });
+	return del(['build/*', '!build/.git'], { dot: true });
 };
 
 let pack = () => {

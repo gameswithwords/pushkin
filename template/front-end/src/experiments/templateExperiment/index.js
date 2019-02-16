@@ -6,7 +6,7 @@ import jsPsych from 'pushkin-jspsych';
 const pushkin = new pushkinClient();
 window.jsPsych = jsPsych; // for jsPsych plugin access
 
-export default class test extends React.Component {
+export default class template extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -16,7 +16,7 @@ export default class test extends React.Component {
 	componentDidMount() { this.startExperiment(); }
 
 	async startExperiment() {
-		await pushkin.connect('/api/test');
+		await pushkin.connect('/api/template');
 		await pushkin.prepExperimentRun();
 		await pushkin.loadScripts([
 			'https://cdn.jsdelivr.net/gh/jspsych/jsPsych@6.0.4/plugins/jspsych-html-button-response.js',

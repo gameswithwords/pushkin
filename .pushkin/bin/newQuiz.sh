@@ -18,15 +18,9 @@ set +e
 # WORKING DIR: pushkin root
 ##############################################
 
-# this does not exist as part of the core pushkin distribution
-# so that the distribution can be updated without overwriting
-
 if [ ! -d "${pushkin_user_quizzes}" ]; then
-        mkdir -p "${pushkin_user_quizzes}"
-	cp .pushkin/boilerplate/quizzes/* "${pushkin_user_quizzes}"/../
+	mkdir -p "${pushkin_user_quizzes}"
 fi
-
-
 
 ##############################################
 # variables
@@ -75,12 +69,6 @@ recurseReplace () {
 			replaceQuizName "${thing}" "${quizName}" > "${outRoot}/${newBase}"
 
 		elif [ -d "${thing}" ]; then
-
-			# for testing purposes only
-			# once the worker works we should remove node modules entirely
-			# and use prepareFiles to install the dependencies in the front-end
-			# package or wherever else they're needed
-			if [ "${base}" == "node_modules" ]; then continue; fi # special case
 
 			# normal case/otherwise:
 			mkdir "${outRoot}/${base}"

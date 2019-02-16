@@ -32,7 +32,7 @@ args.debug = true;
 
 
 
-// Webpack configuration (main.js => dist/main.{hash}.js)
+// Webpack configuration (main.js => build/main.{hash}.js)
 // http://webpack.github.io/docs/configuration.html
 const config = {
 	node: { fs: 'empty' },
@@ -46,7 +46,7 @@ const config = {
 	],
 
 	output: {
-		path: path.resolve(__dirname, 'dist'),
+		path: path.resolve(__dirname, 'build'),
 		publicPath: args.debug ? '' : args.publicPath, // where bundled files are uploaded on server
 		filename: '[name].[hash].js',
 		chunkFilename: '[id].[chunkhash].js',

@@ -5,4 +5,4 @@ COPY ./package.json /usr/src/app
 COPY ./dockerStart.sh /usr/src/app
 WORKDIR /usr/src/app
 RUN npm install --production
-CMD ["node", "index.js"]
+CMD ["bash", "dockerStart.sh"]

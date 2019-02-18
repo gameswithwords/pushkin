@@ -1,6 +1,6 @@
 {
     "name": "pushkin-api",
-    "version": "0.0.16",
+    "version": "0.0.17",
     "description": "The core Pushkin API module designed for interfacing between Pushkin clients and Pushkin workers through RabbitMQ",
     "main": "build/index.js",
     "files": [

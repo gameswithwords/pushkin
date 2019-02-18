@@ -31,15 +31,18 @@ export default class PushkinAPI {
 	}
 
 	async init() {
-		return amqp.connect(this.amqpAddress)
-			.then(conn => {
-				this.conn = conn;
-				this.initialized = true;
-				console.log('API init connected');
-			})
-			.catch(err => {
-				console.log(`Error connecting to message queue: ${err}`);
-			});
+		return new Promise((resolve, reject) => {
+			amqp.connect(this.amqpAddress)
+				.then(conn => {
+					this.conn = conn;
+					this.initialized = true;
+					console.log('API init connected');
+					resolve();
+				})
+				.catch(err => {
+					reject(`Error connecting to message queue: ${err}`);
+				});
+		});
 	}
 
 	useController(route, controller) {

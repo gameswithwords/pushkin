@@ -37,8 +37,11 @@ case "${toMake}" in
 	"compose")
 		.pushkin/bin/makeDockerCompose.sh "$@"
 		;;
+	"composeDev")
+		.pushkin/bin/makeDockerComposeDev.sh "$@"
+		;;
 	*)
-		die "can make 'quiz' or 'compose'"
+		die "can make 'quiz', 'compose', or 'composeDev'"
 		;;
 esac
 

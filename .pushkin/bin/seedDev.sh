@@ -1,11 +1,13 @@
 #!/bin/bash
 
+# This does the exact same thing as seed, just overrides the host to be localhost.
+
 ##############################################
 # sources
 ##############################################
 
 set -e
-scriptName='migrate'
+scriptName='seedDev'
 pushkin_conf_dir="$PWD"/.pushkin
 
 source "${pushkin_conf_dir}/pushkin_config_vars.sh"
@@ -28,9 +30,8 @@ set +e
 # start
 ##############################################
 
-export DATABASE_URL="postgres://${main_db_user}:${main_db_pass}@${main_db_url}/${main_db_name}"
-echo "$DATABASE_URL"
+export DATABASE_URL="postgres://${main_db_user}:${main_db_pass}@localhost/${main_db_name}"
 cd "${pushkin_db_worker}"
-npm run migrations
+npm run seed
 
 log "done"

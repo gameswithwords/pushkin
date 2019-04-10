@@ -3,18 +3,17 @@
 Get Pushkin
 =========================
 
-To install Pushkin, you will need `wget`, which is easily installed using Homebrew or another package manager.
-
-After installing `wget`, visit https://github.com/pushkin-consortium/pushkin_quickinstall and follow the instructions. This will download everything you need and set up the Command Line Tools (CLT).
-
-.. note:: These docs assume that the  command 'pushkin' points to the CLT. If you choose not to do this, be aware that most of the docs will not work.
-
 Pushkin relies on the following programs, which can easily be installed with Homebrew - if you're on a Mac - or another package manager:
 - node
 - npm
 - envsubst
+- wget
 
-Once these are installed, run ``pushkin init`` to automated installing packages and setting up the Pushkin environment.
+After installing these, visit https://github.com/pushkin-consortium/pushkin_quickinstall and follow the instructions. This will download everything you need and set up the Command Line Tools (CLT).
+
+.. note:: These docs assume that the  command 'pushkin' points to the CLT. If you choose not to do this, be aware that most of the docs will not work.
+
+Once these are installed, run ``pushkin init`` to automatically install packages and set up the Pushkin environment.
 
 Once you've got Pushkin downloaded and installed, see :ref:`new-quiz` to make a quiz.
 

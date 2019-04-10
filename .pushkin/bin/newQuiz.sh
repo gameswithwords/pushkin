@@ -99,4 +99,11 @@ if ! isQuiz "${user_quizzes}/${qname}"; then
 	die "ERROR: Failed to build quiz. Did not detect quiz at build location after build attempt. Something is either wrong with newQuiz.sh, isQuiz.sh, or Pushkin's permissions are wrong." 
 fi
 
+# get latest version of jsPsych
+echo "Installing latest version of jsPsych"
+
+curl -s https://api.github.com/repos/jspsych/jspsych/releases/latest | grep "download_url" | cut -d \" -f 4 | wget -qi - -O temp.zip
+unzip temp.zip -d "${user_quizzes}${qname}/quiz_page/dependencies"
+rm temp.zip
+
 log "done"
